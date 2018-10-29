@@ -1,0 +1,2 @@
+COMMENT *** This script should display a pop-up to the user that says "Success!"
+PAUSE "Success!"
