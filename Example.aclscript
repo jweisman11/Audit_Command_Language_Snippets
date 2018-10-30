@@ -1,2 +1,15 @@
+
+
+IMPORT EXCEL TO Practice "C:\Users\jeff.weisman\Desktop\GitHub ACL Project\Practice.fil" FROM "Practice.xlsx" TABLE "Sheet1$" KEEPTITLE FIELD "Field1" C WID 5 AS "" FIELD "Field2" N WID 3 DEC 0 AS "" FIELD "Field3" N WID 3 DEC 0 AS "" FIELD "Field4" N WID 3 DEC 0 AS ""
+OPEN Practice
+define FIELD c_Test COMPUTED
+
+  "1" IF Field1 = "Green"
+  "2" IF Field1 = "Blue"
+  "Unknown"
+
+
+EXPORT FIELDS Field2 XLSX TO "Export_Data" IF c_Test = "Blue" WORKSHEET Practice
+
 COMMENT *** This script should display a pop-up to the user that says "Success!"
 PAUSE "Success!"
