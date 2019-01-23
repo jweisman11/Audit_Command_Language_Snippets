@@ -1,0 +1,18 @@
+COMMENT *** Create a stub take with only one row
+DIR *.AC TO t_Dir
+
+COMMENT *** Append tables to table that may or may not exist
+OPEN t_Dir
+EXTRACT FIELDS ALL TO Non_Existent_Table APPEND
+
+COMMENT *** Open the table that may or may not exist and count number of records
+OPEN Non_Existent_Table
+COUNT
+CLOSE
+
+COMMENT *** If COUNT = 1, the table is empty (except for the one row we added).  Otherwise, table is not empty.
+IF COUNT1 = 1  ASSIGN v_Table_Exists = "No"
+IF COUNT1 <> 1 ASSIGN v_Table_Exists = "Yes"
+
+
+PAUSE "Success"
