@@ -1,0 +1,23 @@
+
+
+
+
+COMMENT *** Create a fake table to use for the export
+SET SAFETY OFF
+CLOSE PRIMARY SECONDARY
+DIRECTORY *.AC TO "t_Directory"
+
+COMMENT *** Export the fake results table to Excel
+OPEN t_Directory
+EXPORT FIELDS SUBSTRING(ALLTRIM(FILE_NAME),1,50) AS "FILE_NAME" FILE_SIZE FILE_ATTRIBUTES FILE_CREATE_DATE FILE_CREATE_TIME FILE_ACCESS_DATE FILE_ACCESS_TIME FILE_WRITE_DATE FILE_WRITE_TIME XLSX TO "Results_of_Reconciliation" WORKSHEET Results_Tab
+CLOSE
+
+ASSIGN v_File_with_Notes = "C:\Users\jeff.weisman\Desktop\Working\ACL Projects\Working with Robb\Notes.xlsx"
+ASSIGN v_Tab_Name_of_Notes_Workbook = "Sheet1"
+ASSIGN v_File_with_Reconciliation = "C:\Users\jeff.weisman\Desktop\Working\ACL Projects\Working with Robb\Results_of_Reconciliation.xlsx"
+ASSIGN v_Tab_Name_of_Target_Workbook = "Results_Tab"
+
+COMMENT *** Call the VBscript
+EXECUTE '"Copy_Notes_into_Reconciliation.vbs" "%v_File_with_Notes%" "%v_Tab_Name_of_Notes_Workbook%" "%v_File_with_Reconciliation%" "%v_Tab_Name_of_Target_Workbook%"'
+
+
